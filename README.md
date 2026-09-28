@@ -49,7 +49,6 @@ Install dependencies (for PDF report and charting tools):
 ```bash
 pip install -r requirements.txt
 ```
-PYTHONPATH=. python3 app/cli_interface.py
 ### 3. Run the Application
 Start the interactive command-line application:
 ```bash
