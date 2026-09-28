@@ -1,7 +1,7 @@
 # Project Statement & System Scope
 **Project Title**: Campus Space & Resource Allocation System  
 **Course Context**: VITyarthi Flipped Course Evaluation  
-**Author**: Student Project Submission (Problem Solving)
+**Author**: 26BHI10139 (Shubham Singh)(Problem Solving)
 
 ---
 
