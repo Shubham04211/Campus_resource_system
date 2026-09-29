@@ -19,10 +19,10 @@ Educational institutions require transparent, conflict-free management of shared
   - `STUDENT`: Access to Meeting Rooms, Computer Labs, Projector Kits (Max 3 hours/booking).
   - `FACULTY`: Access to Auditoriums, Seminar Halls, Labs, Meeting Rooms (Max 8 hours/booking).
   - `ADMIN`: Full system access and cancellation overrides.
-- 🕒 **Campus Operating Hours**: Automated enforcement of operational windows (08:00 - 20:00).
-- 📊 **Utilization Analytics**: Peak booking hour reports, departmental usage breakdown, and total reserved hours.
-- 💾 **State Persistence**: Automatic JSON state saving/restoration.
-- 🧪 **Automated Unit Testing**: Comprehensive test suite using Python's native `unittest` framework.
+-  **Campus Operating Hours**: Automated enforcement of operational windows (08:00 - 20:00).
+-  **Utilization Analytics**: Peak booking hour reports, departmental usage breakdown, and total reserved hours.
+- **State Persistence**: Automatic JSON state saving/restoration.
+-  **Automated Unit Testing**: Comprehensive test suite using Python's native `unittest` framework.
 
 ---
 
