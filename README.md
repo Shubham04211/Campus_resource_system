@@ -75,28 +75,19 @@ OK
 
 ---
 
-## 📂 Project Repository Structure
+##  Project Repository Structure
 ```text
 campus_resource_system/
-├── statement.md                  # Problem statement, scope, target users & features
-├── README.md                     # Setup, execution guide & technical specifications
-├── requirements.txt              # Project dependencies
-├── app/                          # Core application package
-│   ├── __init__.py               # Package metadata
-│   ├── config.py                 # System constants, categories & permissions
-│   ├── models.py                 # Domain models (User, Resource, Booking, TimeSlot)
-│   ├── booking_engine.py         # Conflict resolution & booking validation engine
-│   ├── analytics.py              # Facility usage metrics & peak hour analysis
-│   └── cli_interface.py          # Interactive console driver & seed data loader
-├── tests/                        # Unit testing suite
-│   ├── __init__.py
-│   └── test_booking_engine.py    # Automated test cases
-├── diagrams/                     # Text-based visual architecture diagrams
-│   └── architecture_flow.txt     # System flow & module interactions
-└── Campus_Resource_System_Report.pdf  # Comprehensive 15-Section PDF Project Report
+├── app/
+│   ├── analytics.py
+│   ├── booking_engine.py
+│   ├── cli_interface.py
+│   ├── config.py
+│   └── models.py
+├── tests/
+│   └── test_booking_engine.py
+├── Campus_resource_system.pdf
+├── README.md
+├── requirements.txt
+└── statement.md
 ```
-
----
-
-## 📜 License & Compliance
-Submitted in fulfillment of the **VITyarthi Build Your Own Project** flipped course evaluation guidelines. All code and documentation adhere strictly to academic integrity expectations.
