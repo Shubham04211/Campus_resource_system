@@ -1,0 +1,107 @@
+================================================================================
+           CAMPUS SPACE & RESOURCE ALLOCATION SYSTEM
+                 SYSTEM ARCHITECTURE & FLOW DIAGRAM
+================================================================================
+
+1. HIGH-LEVEL MODULE ARCHITECTURE
+--------------------------------------------------------------------------------
+
+   +-----------------------------------------------------------------------+
+   |                       USER INTERFACE LAYER                            |
+   |                       (app/cli_interface.py)                          |
+   +-----------------------------------------------------------------------+
+                                       |
+                                       v
+   +-----------------------------------------------------------------------+
+   |                       BUSINESS LOGIC LAYER                            |
+   |                                                                       |
+   |   +-----------------------+           +---------------------------+   |
+   |   |   app/booking_engine  | <-------> |     app/analytics.py      |   |
+   |   |   - Policy Validation |           |  - Utilization Rate Calc  |   |
+   |   |   - Conflict Detection|           |  - Peak Hours Analysis    |   |
+   |   +-----------------------+           +---------------------------+   |
+   +-----------------------------------------------------------------------+
+                                       |
+                                       v
+   +-----------------------------------------------------------------------+
+   |                        DOMAIN MODEL LAYER                             |
+   |                         (app/models.py)                               |
+   |    [User]    [Resource]    [TimeSlot]    [Booking]                   |
+   +-----------------------------------------------------------------------+
+                                       |
+                                       v
+   +-----------------------------------------------------------------------+
+   |                       PERSISTENCE LAYER                               |
+   |                    (data/system_state.json)                           |
+   +-----------------------------------------------------------------------+
+
+
+2. RESERVATION VALIDATION & CONFLICT RESOLUTION WORKFLOW
+--------------------------------------------------------------------------------
+
+  [User Input] ---> Submit Booking Request (User ID, Resource ID, Start, End, Purpose)
+                           |
+                           v
+              +--------------------------+
+              | 1. User Existence Check  | --(Invalid)--> [Reject: User Not Found]
+              +--------------------------+
+                           | (Valid)
+                           v
+              +--------------------------+
+              | 2. Role Auth Check       | --(Unauthorized)--> [Reject: Role Denied]
+              +--------------------------+
+                           | (Authorized)
+                           v
+              +--------------------------+
+              | 3. Duration Cap Check    | --(Exceeds Cap)--> [Reject: Duration Exceeded]
+              +--------------------------+
+                           | (Within Limit)
+                           v
+              +--------------------------+
+              | 4. Operating Hours Check | --(Outside Hours)--> [Reject: Outside 08:00-20:00]
+              +--------------------------+
+                           | (Valid Hours)
+                           v
+              +--------------------------+
+              | 5. Interval Overlap Test |
+              | max(StartA, StartB) <    | --(Overlap Found)--> [Reject: Schedule Conflict]
+              | min(EndA, EndB)          |
+              +--------------------------+
+                           | (No Conflict)
+                           v
+              +--------------------------+
+              | Generate Booking ID      |
+              | Status = CONFIRMED       |
+              | Persist to JSON          |
+              +--------------------------+
+                           |
+                           v
+               [Return Booking Confirmation]
+
+
+3. ENTITY RELATIONSHIP (ER) FLOW
+--------------------------------------------------------------------------------
+
+   +-------------------+              +-------------------+
+   |       USER        | 1          * |      BOOKING      |
+   |-------------------|--------------|-------------------|
+   | user_id (PK)      |              | booking_id (PK)   |
+   | name              |              | user_id (FK)      |
+   | email             |              | resource_id (FK)  |
+   | role              |              | start_time        |
+   | department        |              | end_time          |
+   +-------------------+              | status            |
+                                      +-------------------+
+                                                | *
+                                                |
+                                                | 1
+                                      +-------------------+
+                                      |     RESOURCE      |
+                                      |-------------------|
+                                      | resource_id (PK)  |
+                                      | name              |
+                                      | category          |
+                                      | capacity          |
+                                      | location          |
+                                      +-------------------+
+================================================================================
